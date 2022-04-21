@@ -87,7 +87,7 @@ service_create_container() {
   local PASSWORD="$(service_password "$SERVICE")"
 
   # shellcheck disable=SC2086
-  ID=$(docker run --name "$SERVICE_NAME" $MEMORY_LIMIT $SHM_SIZE -v "$SERVICE_HOST_ROOT/data:/data" -v "$SERVICE_HOST_ROOT/$PLUGIN_CONFIG_SUFFIX:/etc/typesense" --env-file="$SERVICE_ROOT/ENV" -d --restart always --label dokku=service --label dokku.service=typesense "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" --data-dir /data $CONFIG_OPTIONS)
+  ID=$(docker run --name "$SERVICE_NAME" $MEMORY_LIMIT $SHM_SIZE -v "$SERVICE_HOST_ROOT/data:/data" -v "$SERVICE_HOST_ROOT/$PLUGIN_CONFIG_SUFFIX:/etc/typesense" --env-file="$SERVICE_ROOT/ENV" -d --restart always --label dokku=service --label dokku.service=typesense "$PLUGIN_IMAGE:$PLUGIN_IMAGE_VERSION" --data-dir=/data --config=/etc/typesense/typesense-server.ini $CONFIG_OPTIONS)
   echo "$ID" >"$SERVICE_ROOT/ID"
 
   dokku_log_verbose_quiet "Waiting for container to be ready"
