@@ -1,6 +1,6 @@
 # dokku typesense [![Build Status](https://img.shields.io/github/workflow/status/dokku/dokku-typesense/CI/master?style=flat-square "Build Status")](https://github.com/dokku/dokku-typesense/actions/workflows/ci.yml?query=branch%3Amaster) [![IRC Network](https://img.shields.io/badge/irc-libera-blue.svg?style=flat-square "IRC Libera")](https://webchat.libera.chat/?channels=dokku)
 
-Official typesense plugin for dokku. Currently defaults to installing [typesense 0.22.2](https://hub.docker.com/_/typesense/).
+Official typesense plugin for dokku. Currently defaults to installing [typesense/typesense 0.22.2](https://hub.docker.com/r/typesense/typesense/).
 
 ## Requirements
 
@@ -70,10 +70,10 @@ Create a typesense service named lollipop:
 dokku typesense:create lollipop
 ```
 
-You can also specify the image and image version to use for the service. It *must* be compatible with the typesense image.
+You can also specify the image and image version to use for the service. It *must* be compatible with the typesense/typesense image.
 
 ```shell
-export TYPESENSE_IMAGE="typesense"
+export TYPESENSE_IMAGE="typesense/typesense"
 export TYPESENSE_IMAGE_VERSION="${PLUGIN_IMAGE_VERSION}"
 dokku typesense:create lollipop
 ```
