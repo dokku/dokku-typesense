@@ -1,0 +1,4 @@
+[plugin]
+description = "dokku typesense service plugin"
+version = "0.1.0"
+[plugin.config]
