@@ -31,6 +31,7 @@ typesense:linked <service> <app>                   # check if the typesense serv
 typesense:links <service>                          # list all apps linked to the typesense service
 typesense:list                                     # list all typesense services
 typesense:logs <service> [-t|--tail] <tail-num-optional> # print the most recent log(s) for this service
+typesense:pause <service>                          # pause a running typesense service
 typesense:promote <service> <app>                  # promote service <service> as TYPESENSE_URL in <app>
 typesense:restart <service>                        # graceful shutdown and restart of the typesense service container
 typesense:start <service>                          # start a previously stopped typesense service
@@ -345,10 +346,23 @@ dokku typesense:start lollipop
 dokku typesense:stop <service>
 ```
 
-Stop the service and the running container:
+Stop the service and removes the running container:
 
 ```shell
 dokku typesense:stop lollipop
+```
+
+### pause a running typesense service
+
+```shell
+# usage
+dokku typesense:pause <service>
+```
+
+Pause the running container for the service:
+
+```shell
+dokku typesense:pause lollipop
 ```
 
 ### graceful shutdown and restart of the typesense service container
