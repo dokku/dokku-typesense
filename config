@@ -3,7 +3,8 @@ _DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 export TYPESENSE_IMAGE=${TYPESENSE_IMAGE:="$(awk -F '[ :]' '{print $2}' "${_DIR}/Dockerfile")"}
 export TYPESENSE_IMAGE_VERSION=${TYPESENSE_IMAGE_VERSION:="$(awk -F '[ :]' '{print $3}' "${_DIR}/Dockerfile")"}
 export TYPESENSE_ROOT=${TYPESENSE_ROOT:="$DOKKU_LIB_ROOT/services/typesense"}
-export TYPESENSE_HOST_ROOT=${TYPESENSE_HOST_ROOT:=$TYPESENSE_ROOT}
+export DOKKU_LIB_HOST_ROOT=${DOKKU_LIB_HOST_ROOT:=$DOKKU_LIB_ROOT}
+export TYPESENSE_HOST_ROOT=${TYPESENSE_HOST_ROOT:="$DOKKU_LIB_HOST_ROOT/services/typesense"}
 
 export PLUGIN_UNIMPLEMENTED_SUBCOMMANDS=(backup backup-auth backup-deauth backup-schedule backup-schedule backup-set-encryption backup-unschedule backup-unset-encryption connect export import)
 export PLUGIN_COMMAND_PREFIX="typesense"
