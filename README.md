@@ -34,6 +34,7 @@ typesense:logs <service> [-t|--tail] <tail-num-optional> # print the most recent
 typesense:pause <service>                          # pause a running typesense service
 typesense:promote <service> <app>                  # promote service <service> as TYPESENSE_URL in <app>
 typesense:restart <service>                        # graceful shutdown and restart of the typesense service container
+typesense:set <service> <key> <value>              # set or clear a property for a service
 typesense:start <service>                          # start a previously stopped typesense service
 typesense:stop <service>                           # stop a running typesense service
 typesense:unexpose <service>                       # unexpose a previously exposed typesense service
@@ -238,6 +239,25 @@ You can unlink a typesense service:
 
 ```shell
 dokku typesense:unlink lollipop playground
+```
+
+### set or clear a property for a service
+
+```shell
+# usage
+dokku typesense:set <service> <key> <value>
+```
+
+Set the network to attach after the service container is started:
+
+```shell
+dokku typesense:set lollipop post-create-network custom-network
+```
+
+Unset the post-create-network value:
+
+```shell
+dokku typesense:set lollipop post-create-network
 ```
 
 ### Service Lifecycle
