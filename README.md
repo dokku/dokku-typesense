@@ -500,8 +500,8 @@ Cat the contents of the configured backup cronfile for the service:
 dokku typesense:backup-schedule-cat lollipop
 ```
 
-### Disabling `docker pull` calls
+### Disabling `docker image pull` calls
 
-If you wish to disable the `docker pull` calls that the plugin triggers, you may set the `TYPESENSE_DISABLE_PULL` environment variable to `true`. Once disabled, you will need to pull the service image you wish to deploy as shown in the `stderr` output.
+If you wish to disable the `docker image pull` calls that the plugin triggers, you may set the `TYPESENSE_DISABLE_PULL` environment variable to `true`. Once disabled, you will need to pull the service image you wish to deploy as shown in the `stderr` output.
 
-Please ensure the proper images are in place when `docker pull` is disabled.
+Please ensure the proper images are in place when `docker image pull` is disabled.
