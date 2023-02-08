@@ -34,6 +34,7 @@ typesense:logs <service> [-t|--tail] <tail-num-optional> # print the most recent
 typesense:pause <service>                          # pause a running typesense service
 typesense:promote <service> <app>                  # promote service <service> as TYPESENSE_URL in <app>
 typesense:restart <service>                        # graceful shutdown and restart of the typesense service container
+typesense:set <service> <key> <value>              # set or clear a property for a service
 typesense:start <service>                          # start a previously stopped typesense service
 typesense:stop <service>                           # stop a running typesense service
 typesense:unexpose <service>                       # unexpose a previously exposed typesense service
@@ -101,7 +102,10 @@ flags:
 - `--exposed-ports`: show service exposed ports
 - `--id`: show the service container id
 - `--internal-ip`: show the service internal ip
+- `--initial-network`: show the initial network being connected to
 - `--links`: show the service app links
+- `--post-create-network`: show the networks to attach to after service container creation
+- `--post-start-network`: show the networks to attach to after service container start
 - `--service-root`: show the service root directory
 - `--status`: show the service running status
 - `--version`: show the service image version
@@ -121,7 +125,10 @@ dokku typesense:info lollipop --dsn
 dokku typesense:info lollipop --exposed-ports
 dokku typesense:info lollipop --id
 dokku typesense:info lollipop --internal-ip
+dokku typesense:info lollipop --initial-network
 dokku typesense:info lollipop --links
+dokku typesense:info lollipop --post-create-network
+dokku typesense:info lollipop --post-start-network
 dokku typesense:info lollipop --service-root
 dokku typesense:info lollipop --status
 dokku typesense:info lollipop --version
@@ -238,6 +245,31 @@ You can unlink a typesense service:
 
 ```shell
 dokku typesense:unlink lollipop playground
+```
+
+### set or clear a property for a service
+
+```shell
+# usage
+dokku typesense:set <service> <key> <value>
+```
+
+Set the network to attach after the service container is started:
+
+```shell
+dokku typesense:set lollipop post-create-network custom-network
+```
+
+Set multiple networks:
+
+```shell
+dokku typesense:set lollipop post-create-network custom-network,other-network
+```
+
+Unset the post-create-network value:
+
+```shell
+dokku typesense:set lollipop post-create-network
 ```
 
 ### Service Lifecycle
