@@ -214,7 +214,7 @@ DOKKU_TYPESENSE_LOLLIPOP_PORT_8108_TCP_ADDR=172.17.0.1
 The following will be set on the linked application by default:
 
 ```
-TYPESENSE_URL=typesense://lollipop:SOME_PASSWORD@dokku-typesense-lollipop:8108/lollipop
+TYPESENSE_URL=typesense://:SOME_PASSWORD@dokku-typesense-lollipop:8108
 ```
 
 The host exposed here only works internally in docker containers. If you want your container to be reachable from outside, you should use the `expose` subcommand. Another service can be linked to your app:
@@ -233,13 +233,7 @@ dokku typesense:link lollipop playground
 This will cause `TYPESENSE_URL` to be set as:
 
 ```
-typesense2://lollipop:SOME_PASSWORD@dokku-typesense-lollipop:8108/lollipop
-```
-
-If you specify `TYPESENSE_DATABASE_SCHEME` to equal `http`, we`ll also automatically adjust `TYPESENSE_URL` to match the http interface:
-
-```
-http://lollipop:SOME_PASSWORD@dokku-typesense-lollipop:${PLUGIN_DATASTORE_PORTS[1]}
+typesense2://:SOME_PASSWORD@dokku-typesense-lollipop:8108
 ```
 
 ### unlink the typesense service from the app
