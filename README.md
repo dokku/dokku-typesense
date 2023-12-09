@@ -83,7 +83,7 @@ export TYPESENSE_IMAGE_VERSION="${PLUGIN_IMAGE_VERSION}"
 dokku typesense:create lollipop
 ```
 
-You can also specify custom environment variables to start the typesense service in semi-colon separated form.
+You can also specify custom environment variables to start the typesense service in semicolon-separated form.
 
 ```shell
 export TYPESENSE_CUSTOM_ENV="USER=alpha;HOST=beta"
