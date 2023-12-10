@@ -75,7 +75,7 @@ Create a typesense service named lollipop:
 dokku typesense:create lollipop
 ```
 
-You can also specify the image and image version to use for the service. It _must_ be compatible with the typesense/typesense image.
+You can also specify the image and image version to use for the service. It *must* be compatible with the typesense/typesense image.
 
 ```shell
 export TYPESENSE_IMAGE="typesense/typesense"
@@ -525,7 +525,6 @@ List all apps linked to the `lollipop` typesense service.
 ```shell
 dokku typesense:links lollipop
 ```
-
 ### Backups
 
 Datastore backups are supported via AWS S3 and S3 compatible services like [minio](https://github.com/minio/minio).
