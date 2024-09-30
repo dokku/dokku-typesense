@@ -1,1 +1,1 @@
-FROM typesense/typesense:27.0
+FROM typesense/typesense:27.1
