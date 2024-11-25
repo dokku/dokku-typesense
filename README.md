@@ -19,6 +19,8 @@ sudo dokku plugin:install https://github.com/dokku/dokku-typesense.git typesense
 ```
 typesense:app-links <app>                          # list all typesense service links for a given app
 typesense:backup-schedule-cat <service>            # cat the contents of the configured backup cronfile for the service
+typesense:backup-set-public-key-encryption <service> <public-key-id> # set GPG Public Key encryption for all future backups of typesense service
+typesense:backup-unset-public-key-encryption <service> # unset GPG Public Key encryption for future backups of the typesense service
 typesense:clone <service> <new-service> [--clone-flags...] # create container <new-name> then copy data from <name> into <new-name>
 typesense:create <service> [--create-flags...]     # create a typesense service
 typesense:destroy <service> [-f|--force]           # delete the typesense service/data/container if there are no links left
@@ -532,6 +534,32 @@ Datastore backups are supported via AWS S3 and S3 compatible services like [mini
 You may skip the `backup-auth` step if your dokku install is running within EC2 and has access to the bucket via an IAM profile. In that case, use the `--use-iam` option with the `backup` command.
 
 Backups can be performed using the backup commands:
+
+### set GPG Public Key encryption for all future backups of typesense service
+
+```shell
+# usage
+dokku typesense:backup-set-public-key-encryption <service> <public-key-id>
+```
+
+Set the `GPG` Public Key for encrypting backups:
+
+```shell
+dokku typesense:backup-set-public-key-encryption lollipop
+```
+
+### unset GPG Public Key encryption for future backups of the typesense service
+
+```shell
+# usage
+dokku typesense:backup-unset-public-key-encryption <service>
+```
+
+Unset the `GPG` Public Key encryption for backups:
+
+```shell
+dokku typesense:backup-unset-public-key-encryption lollipop
+```
 
 ### cat the contents of the configured backup cronfile for the service
 
