@@ -1,6 +1,6 @@
 # dokku typesense [![Build Status](https://img.shields.io/github/actions/workflow/status/dokku/dokku-typesense/ci.yml?branch=master&style=flat-square "Build Status")](https://github.com/dokku/dokku-typesense/actions/workflows/ci.yml?query=branch%3Amaster) [![IRC Network](https://img.shields.io/badge/irc-libera-blue.svg?style=flat-square "IRC Libera")](https://webchat.libera.chat/?channels=dokku)
 
-Official typesense plugin for dokku. Currently defaults to installing [typesense/typesense 27.1](https://hub.docker.com/r/typesense/typesense/).
+Official typesense plugin for dokku. Currently defaults to installing [typesense/typesense 28.0](https://hub.docker.com/r/typesense/typesense/).
 
 ## Requirements
 
