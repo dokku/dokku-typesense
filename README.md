@@ -11,7 +11,7 @@ Official typesense plugin for dokku. Currently defaults to installing [typesense
 
 ```shell
 # on 0.19.x+
-sudo dokku plugin:install https://github.com/dokku/dokku-typesense.git typesense
+sudo dokku plugin:install https://github.com/dokku/dokku-typesense.git --name typesense
 ```
 
 ## Commands
