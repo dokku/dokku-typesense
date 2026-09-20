@@ -1,0 +1,53 @@
+---
+services:
+  typesense:
+    image: "{{ .Image }}:{{ .ImageVersion }}"
+
+    # arguments to the image's own entrypoint. The api key is in the config file
+    # rather than here, so it is not in the container's command line.
+    command:
+      - --data-dir=/data
+      - --config=/etc/typesense/typesense-server.ini
+
+    volumes:
+      - type: bind
+        source: "{{ .HostRoot }}/config"
+        target: /etc/typesense
+      - type: bind
+        source: "{{ .HostRoot }}/data"
+        target: /data
+
+    configs:
+      - source: typesense_server_ini
+        target: /etc/typesense/typesense-server.ini
+
+    ports:
+      - name: native
+        target: 8108
+        primary: true
+
+configs:
+  typesense_server_ini:
+    content: |
+      [server]
+      api-key = {{ .Secret.password }}
+
+x-dokku:
+  plugin: typesense
+  title: Typesense
+  scheme: typesense
+  alias: TYPESENSE
+  dsn: "{{ .Scheme }}://:{{ .Secret.password }}@{{ .Host }}:{{ .Port.native }}"
+
+  # the image ships no client whose exit status could answer a healthcheck
+  wait: native
+
+  secrets:
+    password:
+      file: PASSWORD
+      length: 64
+      env: SERVICE_PASSWORD
+
+  # typesense speaks http rather than shipping a client, and holds its data in
+  # its own format with no dump tool, so there is nothing to connect with and
+  # nothing to export. Clone and the backup family fall out of that.
