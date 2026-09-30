@@ -4,10 +4,11 @@ services:
     image: "{{ .Image }}:{{ .ImageVersion }}"
 
     # arguments to the image's own entrypoint. The api key is in the config file
-    # rather than here, so it is not in the container's command line.
+    # rather than here, so it is not in the container's command line. Both
+    # paths follow the volumes, so a service that moved one still finds it.
     command:
-      - --data-dir=/data
-      - --config=/etc/typesense/typesense-server.ini
+      - "--data-dir={{ .Target.data }}"
+      - "--config={{ .Target.config }}/typesense-server.ini"
 
     volumes:
       - type: bind
