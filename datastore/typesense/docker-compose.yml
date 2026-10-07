@@ -52,3 +52,14 @@ x-dokku:
   # typesense speaks http rather than shipping a client, and holds its data in
   # its own format with no dump tool, so there is nothing to connect with and
   # nothing to export. Clone and the backup family fall out of that.
+  commands:
+    # beside the service, in an image dokku already ships that has python, since
+    # the typesense image ships no client. The collections are deleted through
+    # the api rather than the data directory emptied, which would take the keys
+    # an app authenticates with along with them.
+    reset:
+      mode: sidecar
+      image: dokku/s3backup:0.20.0
+      exec: ["dokku-typesense-reset"]
+      env:
+        TYPESENSE_API_KEY: "{{ .Secret.password }}"
