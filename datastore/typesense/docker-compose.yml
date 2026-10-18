@@ -49,6 +49,39 @@ x-dokku:
       length: 64
       env: SERVICE_PASSWORD
 
+      # the api key is in the seeded config file, which typesense only reads
+      # as it starts, so the line in the file is written over with the service
+      # down, keeping the rest of the file, its owner and its mode, and the
+      # service is started again on it
+      change:
+        mode: offline
+        user: "0"
+        entrypoint: ""
+        exec:
+          - sh
+          - -c
+          - |
+            set -e
+            config="$1"
+            updated="$(while IFS= read -r line || [ -n "$line" ]; do
+              case "$line" in
+                api-key*) printf 'api-key = %s\n' "$NEW_PASSWORD" ;;
+                *) printf '%s\n' "$line" ;;
+              esac
+            done < "$config")"
+            case "$updated" in
+              *"api-key = $NEW_PASSWORD"*) ;;
+              *)
+                echo "$config has no api-key line to change" >&2
+                exit 1
+                ;;
+            esac
+            printf '%s\n' "$updated" > "$config"
+          - dokku-typesense-change-password
+          - "{{ .Target.config }}/typesense-server.ini"
+        env:
+          NEW_PASSWORD: "{{ .NewSecret }}"
+
   # typesense speaks http rather than shipping a client, and holds its data in
   # its own format with no dump tool, so there is nothing to connect with and
   # nothing to export. Clone and the backup family fall out of that.
